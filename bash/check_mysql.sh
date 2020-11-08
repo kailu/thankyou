@@ -4,10 +4,14 @@
 # */3 * * * * /home/kailu/check_mysql.sh >> /home/kailu/mysql_status.log
 UP=$(/etc/init.d/mysqld status | grep running | grep -v not | wc -l);
 
+now=$(date +"%T")
+echo "Current time: $now"
+
+
 if [ "$UP" -ne 1 ];
 then
         echo "MySQL is down.";
-        sudo service mysql start
+        sudo service mysqld restart
 
 else
         echo "All is well.";
